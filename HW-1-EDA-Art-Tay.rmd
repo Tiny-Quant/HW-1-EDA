@@ -1,0 +1,14 @@
+---
+title: "Exploratory Data Analysis"
+author: "Art Tay"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+##Setup code
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+# Libraries
+library(tidyverse)
+```
