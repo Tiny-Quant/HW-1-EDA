@@ -13,17 +13,19 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 ```{r}
 # Libraries
-library(tidyverse)
 library(VIM)
 library(mice)
+library(naniar)
+library(tidyverse)
+library(fastDummies)
 ```
 
 ```{r}
 # Load in Data
 data_full <- read.csv("AB_NYC_2019.csv", stringsAsFactors = T, header = T)
-dim(data_full)
-colnames(data_full)
-str(data_full)
+#dim(data_full)
+#colnames(data_full)
+#str(data_full)
 ```
 
 ## Data Cleaning
@@ -32,8 +34,10 @@ str(data_full)
 
 # Removing uninformative variables (names).
 data_quant <- data_full %>% select(-c(id, host_id, name, host_name))
-str(data_quant)
+#str(data_quant)
 ```
+
+### Missing Data
 
 ```{r}
 # Missing data.
@@ -43,46 +47,141 @@ str(data_quant)
 # lattitude == 0 -> NA
 # longitude == 0 -> NA
 # min_night == 0 -> NA
-# factors == "" or " " -> NA
+data_quant_mis <- data_quant %>%
+    mutate(price = ifelse(price == 0, NA, price)) %>%
+    mutate(latitude = ifelse(latitude == 0, NA, latitude)) %>%
+    mutate(longitude = ifelse(longitude == 0, NA, longitude)) %>%
+    mutate(minimum_nights = ifelse(minimum_nights == 0, NA, minimum_nights)) %>%
+    # It was done using replace to maintain factor coding
+    mutate(room_type = replace(room_type,
+        room_type == "" | room_type == " ", NA)) %>%
+    mutate(neighbourhood_group = replace(neighbourhood_group,
+        neighbourhood_group == "" | neighbourhood_group == " ",  NA)) %>%
+    mutate(neighbourhood = replace(neighbourhood,
+        neighbourhood == "" | neighbourhood == " ", NA)) %>%
+    mutate(last_review = replace(last_review,
+        last_review == "" | room_type == " ", NA))
 
-# A functions that checks values of factors to
-# see if they are " " or "".
-# If they are the function replaces them with NA.
-# Otherwise it returns the original value.
-check_empty_string <- function(x){
-    return(ifelse(is.factor(x) == T,
-            ifelse(x == " " | x == "", NA, x), x))
+# data_quant_mis <- as.data.frame(data_quant_mis)
+
+#colnames(data_quant_mis) <- colnames(data_quant)
+str(data_quant_mis)
+```
+
+```{r, include = F}
+# Plot the percentage and patterns of missing values.
+missing_percent <- apply(data_quant_mis, MARGIN = 2,
+    FUN = function(x){sum(is.na(x)) / length(x)})
+
+# Filter out non-missing variables
+missing_percent <- as.data.frame(missing_percent) %>%
+                   filter(missing_percent > 0)
+
+# Add variable names to the data frame.
+missing_percent$Variable <- c("price", "last review date", "reviews per month")
+
+# Round and change proportion to percentages.
+missing_percent$missing_percent <- round(
+        missing_percent$missing_percent * 100, 2)
+
+plot_1 <- missing_percent %>%
+          ggplot(aes(x = reorder(Variable, missing_percent),
+            y = missing_percent, fill = Variable)) +
+          geom_bar(stat = "identity") +
+          geom_text(aes(label = missing_percent), vjust = 1.6) +
+          theme_bw() + theme(legend.position = "none") +
+          ggtitle("Percentages of Missing Values by Variable") +
+          ylab("Percent Missing") + xlab("")
+```
+
+```{r}
+# Plot the pattern of missing values
+gg_miss_upset(data_quant_mis, nintersects = NA, text.scale = 2,
+    mainbar.y.label = "Count of Observations with Missing Data",
+    point.size = 5, line.size = 2, matrix.color = "orange",
+    main.bar.color = "skyblue")
+```
+
+```{r}
+# Check the subset of points with missing prices.
+mis_price <- data_full %>% filter(price == 0)
+
+# Only 3 are missing availability.
+# Most in Brooklyn, but no clear relationship.
+# Seem to be MAR.
+# Imputation seems valid.
+
+# Check if all last review and number review missing together.
+sum(is.na(data_quant_mis$last_review) &
+    !is.na(data_quant_mis$reviews_per_month))
+
+mis_reviews <- data_full %>% filter(is.na(data_quant_mis$last_review)) %>%
+                select(reviews_per_month, last_review, number_of_reviews)
+
+# There two values are always missing together.
+# Check if total review is zero also.
+sum(mis_reviews$number_of_reviews > 0)
+
+# Number of Review, Reviews per month, and last review date are all missing
+# together.
+```
+
+### Feature Engineering
+```{r}
+# Handles all missing values that are not price
+data_quant_fe <- data_quant_mis %>%
+                 # Change NA reviews per month to be 0.
+                 mutate(reviews_per_month =
+                    ifelse(is.na(reviews_per_month), 0, reviews_per_month))%>%
+                 # Create a new variable last_review_year to reduce dimensionality.
+                 mutate(last_review_year = substring(last_review, 1, 4)) %>%
+                 # Modify NA last_review to be a new level "none".
+                 mutate(last_review_year = replace(last_review_year,
+                    is.na(last_review_year), "none")) %>%
+                 # Cast to be factor.
+                 mutate(last_review_year = as.factor(last_review_year)) %>%
+                 # Remove old last review variable
+                 select(-last_review) %>%
+                 # natural log transform price.
+                 mutate(price = log(price))
+# str(data_quant_fe)
+```
+
+```{r}
+# Centering a scale numerics.
+data_quant_mis_numeric <- data_quant_fe %>% select(where(is.numeric))
+
+# Retain vector to enable back transformation.
+means <- apply(data_quant_mis_numeric, MARGIN = 2, FUN = mean, na.rm = T)
+sds <- apply(data_quant_mis_numeric, MARGIN = 2, FUN = sd, na.rm = T)
+
+# Apply transformation
+for(i in 1:length(means)){
+    data_quant_mis_numeric[, i] <-
+        (data_quant_mis_numeric[, i] - means[i]) / sds[i]
 }
 
-data_quant_mis <- data_quant %>%
-    mutate(price, ifelse(price == 0, NA, price)) %>%
-    mutate(latitude, ifelse(latitude == 0, NA, latitude)) %>%
-    mutate(longitude, ifelse(longitude == 0, NA, longitude)) %>%
-    mutate(minimum_nights, ifelse(minimum_nights == 0, NA, minimum_nights))
+# Tests
+#means_2 <- apply(data_quant_mis_numeric, MARGIN = 2, FUN = mean, na.rm = T)
+#sds_2 <- apply(data_quant_mis_numeric, MARGIN = 2, FUN = sd, na.rm = T)
 
-data_quant_mis <- apply(data_quant_mis, MARGIN = 2, FUN = check_empty_string)
-
-head(data_quant_mis)
+# Back transformation code.
+#for(i in 1:length(means)){
+    #data_quant_mis_numeric[, i] <-
+        #data_quant_mis_numeric[, i] * sds[i] + means[i]
+#}
 ```
 
 ```{r}
-# Check for amount and types of missing data.
-mis_plot <- aggr(data_quant, number = T, prop = c(T, F))
-plot(mis_plot)
+# Dummy variables (one-hot-encoding)
+
 ```
 
-## Feature Engineering
-
-## Visualizations
-
-```{r}
-# Histogram of price
-hist(log(data_quant$price)) # very right skewed - expected
-```
-
+# Visualizations
 ```{r}
 # boxplot by neighborhood
-plot_1 <- data_quant %>%
+plot_x <- data_quant %>%
     ggplot(aes(x = neighbourhood_group, y = log(price))) +
     geom_boxplot()
 ```
+
