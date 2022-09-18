@@ -3,12 +3,86 @@ title: "Exploratory Data Analysis"
 author: "Art Tay"
 output: pdf_document
 ---
+
 ```{r setup, include=FALSE}
 ##Setup code
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
+# Appendix - Code
+
 ```{r}
 # Libraries
 library(tidyverse)
+library(VIM)
+library(mice)
+```
+
+```{r}
+# Load in Data
+data_full <- read.csv("AB_NYC_2019.csv", stringsAsFactors = T, header = T)
+dim(data_full)
+colnames(data_full)
+str(data_full)
+```
+
+## Data Cleaning
+```{r}
+# Data cleaning
+
+# Removing uninformative variables (names).
+data_quant <- data_full %>% select(-c(id, host_id, name, host_name))
+str(data_quant)
+```
+
+```{r}
+# Missing data.
+
+# Code value that might mean missing.
+# price == 0 -> NA
+# lattitude == 0 -> NA
+# longitude == 0 -> NA
+# min_night == 0 -> NA
+# factors == "" or " " -> NA
+
+# A functions that checks values of factors to
+# see if they are " " or "".
+# If they are the function replaces them with NA.
+# Otherwise it returns the original value.
+check_empty_string <- function(x){
+    return(ifelse(is.factor(x) == T,
+            ifelse(x == " " | x == "", NA, x), x))
+}
+
+data_quant_mis <- data_quant %>%
+    mutate(price, ifelse(price == 0, NA, price)) %>%
+    mutate(latitude, ifelse(latitude == 0, NA, latitude)) %>%
+    mutate(longitude, ifelse(longitude == 0, NA, longitude)) %>%
+    mutate(minimum_nights, ifelse(minimum_nights == 0, NA, minimum_nights))
+
+data_quant_mis <- apply(data_quant_mis, MARGIN = 2, FUN = check_empty_string)
+
+head(data_quant_mis)
+```
+
+```{r}
+# Check for amount and types of missing data.
+mis_plot <- aggr(data_quant, number = T, prop = c(T, F))
+plot(mis_plot)
+```
+
+## Feature Engineering
+
+## Visualizations
+
+```{r}
+# Histogram of price
+hist(log(data_quant$price)) # very right skewed - expected
+```
+
+```{r}
+# boxplot by neighborhood
+plot_1 <- data_quant %>%
+    ggplot(aes(x = neighbourhood_group, y = log(price))) +
+    geom_boxplot()
 ```
