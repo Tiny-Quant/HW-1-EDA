@@ -18,6 +18,8 @@ library(mice)
 library(naniar)
 library(tidyverse)
 library(fastDummies)
+library(NbClust)
+library(kernlab)
 ```
 
 ```{r}
@@ -174,7 +176,106 @@ for(i in 1:length(means)){
 
 ```{r}
 # Dummy variables (one-hot-encoding)
+data_quant_mis_factor <- data_quant_fe %>% select(where(is.factor)) %>%
+                                           # too many levels.
+                                           select(-neighbourhood)
 
+data_quant_mis_factor <- dummy_cols(data_quant_mis_factor,
+                                    remove_selected_columns = T)
+```
+
+```{r}
+# Combine cleaned data set for imputation.
+data_quant_clean <- cbind(data_quant_mis_numeric, data_quant_mis_factor)
+```
+
+```{r, cache = T}
+# kNN imputeation with k = 10
+data_quant_clean_imputed <- VIM::kNN(as.matrix(data_quant_clean), k = 10)
+
+# Create a factor based on whether or not price as imputed
+impStatus <- as.numeric(data_quant_clean_imputed$price_imp)
+
+# get the original columns
+data_quant_clean_imputed <- data_quant_clean_imputed[, 1:26]
+data_quant_clean_imputed$impStatus <- impStatus
+
+# Check 11 imputed values
+#sum(data_quant_clean_imputed$impStatus)
+```
+
+## Clustering
+```{r, cache = T}
+data_clusters <- NbClust(data = data_quant_clean_imputed,
+                         distance = "euclidean",
+                         method = "ward.D",
+                         index = "silhouette")
+```
+
+```{r}
+save(data_clusters, file = "data_clusters.rds")
+```
+
+```{r}
+# Dummy variables (one-hot-encoding)
+factor_all <- data_quant_fe %>% select(where(is.factor))
+
+factor_all <- dummy_cols(factor_all,
+                         remove_selected_columns = T)
+```
+
+```{r}
+# Combine cleaned data set for imputation.
+data_clean_all <- cbind(data_quant_mis_numeric, factor_all)
+```
+
+```{r, cache = T}
+# kNN imputeation with k = 10
+data_clean_imputed_all <- VIM::kNN(as.matrix(data_clean_all), k = 10)
+
+# Create a factor based on whether or not price as imputed
+impStatus <- as.numeric(data_clean_imputed_all$price_imp)
+
+# get the original columns
+data_clean_imputed_all <- data_clean_imputed_all[, 1:247]
+data_clean_imputed_all$impStatus <- impStatus
+
+# Check 11 imputed values
+sum(data_clean_imputed_all$impStatus)
+```
+
+```{r, cache = T}
+data_clusters_2 <- NbClust(data = data_clean_imputed_all,
+                         distance = "euclidean",
+                         method = "ward.D",
+                         index = "silhouette")
+```
+
+```{r}
+save(data_clusters_2, file = "data_clusters_2.rds")
+```
+
+## Kernel Based Clustering
+```{r}
+#rbf <- rbfdot(sigma = 0.05)
+#kernel_distances <- kernelMatrix(
+    #kernel = rbf,
+    #x = as.matrix(data_quant_clean_imputed))
+```
+
+```{r}
+#save(kernel_distances, file = "kernel_distances.rds")
+#load("kernel_distances.rds")
+```
+
+```{r}
+#kernel_clusters <- NbClust(data = data_quant_clean_imputed,
+                           #diss = kernel_distances,
+                           #distance = NULL,
+                           #method = "ward.D",
+                           #min.nc = 2,
+                           #max.nc = 20,
+                           #index = "silhouette")
 ```
 
 # Visualizations
