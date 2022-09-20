@@ -9,6 +9,27 @@ output: pdf_document
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
+# Report
+```{r, include = F}
+# EDA
+
+# What can we learn about different hosts and areas?
+
+# What can we learn from predictions? (ex: locations, prices, reviews, etc)
+
+# Which hosts are the busiest and why?
+    ## Possible variable:
+        # avaliability_x. The availability of the listing x days
+        # in the future as determined by the calendar.
+        # Note a listing may not be available because it has been
+        # booked by a guest or blocked by the host.
+
+# Is there any noticeable difference of traffic among different areas
+# and what could be the reason for it?
+
+#Note: Don't forget get to check for missing data, skewed data, outliers.....
+```
+
 # Appendix - Code
 
 ```{r}
@@ -206,14 +227,15 @@ data_quant_clean_imputed$impStatus <- impStatus
 
 ## Clustering
 ```{r, cache = T}
-data_clusters <- NbClust(data = data_quant_clean_imputed,
-                         distance = "euclidean",
-                         method = "ward.D",
-                         index = "silhouette")
+#data_clusters <- NbClust(data = data_quant_clean_imputed,
+                         #distance = "euclidean",
+                         #method = "ward.D",
+                         #index = "silhouette")
 ```
 
 ```{r}
-save(data_clusters, file = "data_clusters.rds")
+#save(data_clusters, file = "data_clusters.rds")
+load(file = "data_clusters.rds")
 ```
 
 ```{r}
@@ -245,14 +267,15 @@ sum(data_clean_imputed_all$impStatus)
 ```
 
 ```{r, cache = T}
-data_clusters_2 <- NbClust(data = data_clean_imputed_all,
-                         distance = "euclidean",
-                         method = "ward.D",
-                         index = "silhouette")
+#data_clusters_2 <- NbClust(data = data_clean_imputed_all,
+                         #distance = "euclidean",
+                         #method = "ward.D",
+                         #index = "silhouette")
 ```
 
 ```{r}
-save(data_clusters_2, file = "data_clusters_2.rds")
+#save(data_clusters_2, file = "data_clusters_2.rds")
+load(file = "data_clusters_2.rds")
 ```
 
 ## Kernel Based Clustering
@@ -278,6 +301,70 @@ save(data_clusters_2, file = "data_clusters_2.rds")
                            #index = "silhouette")
 ```
 
+## Investigation of Clusters
+
+### Cluster 1 cleaning
+```{r}
+# Back Transform numeric data.
+# Extract numeric columns.
+data_imputed_numeric <- data_quant_clean_imputed %>%
+                        select(1:8)
+
+# Undo centering and scaling.
+for(i in 1:length(means)){
+    data_imputed_numeric[, i] <-
+        data_imputed_numeric[, i] * sds[i] + means[i]
+}
+
+# Undo log transformation on price.
+data_imputed_numeric <- data_imputed_numeric %>%
+                        mutate(price = exp(price)) %>%
+                        # fixes rounding error
+                        mutate(availability_365 = round(availability_365))
+```
+
+```{r}
+# Extract original factor formats.
+data_imputed_factor <- data_quant_fe %>% select(where(is.factor))
+
+# Confirm no missing
+#sum(is.na(data_imputed_factor))
+```
+
+```{r}
+data_clean_cluster_1 <- cbind(data_imputed_numeric,
+                              data_imputed_factor,
+                              "impStatus" = data_quant_clean_imputed$impStatus,
+                              "Cluster" = data_clusters$Best.partition)
+```
+
+### Cluster 2 cleaning
+```{r}
+# Back Transform numeric data.
+# Extract numeric columns.
+data_imputed_numeric_all <- data_clean_imputed_all %>%
+                        select(1:8)
+
+# Undo centering and scaling.
+for(i in 1:length(means)){
+    data_imputed_numeric_all[, i] <-
+        data_imputed_numeric_all[, i] * sds[i] + means[i]
+}
+
+# Undo log transformation on price.
+data_imputed_numeric_all <- data_imputed_numeric_all %>%
+                            mutate(price = exp(price)) %>%
+                            # fixes rounding error
+                            mutate(availability_365 = round(availability_365))
+```
+
+```{r}
+data_clean_cluster_2 <- cbind(data_imputed_numeric_all,
+                              data_imputed_factor,
+                              "impStatus" = data_clean_imputed_all$impStatus,
+                              "Cluster" = data_clusters_2$Best.partition)
+```
+
 # Visualizations
 ```{r}
 # boxplot by neighborhood
@@ -286,3 +373,25 @@ plot_x <- data_quant %>%
     geom_boxplot()
 ```
 
+## Cluster Statistics
+### Clustering 1
+```{r}
+plot_prices_c1 <- data_clean_cluster_1 %>%
+                  select(price, Cluster) %>%
+                  ggplot(aes(price)) +
+                  geom_histogram() +
+                  facet_wrap(~Cluster)
+
+```
+
+
+## Check Skewness
+```{r}
+# Histogram of all numerics
+plot_xx <- data_quant %>%
+           select(where(is.numeric)) %>%
+           pivot_longer(cols = everything()) %>%
+           ggplot(aes(value)) +
+           geom_histogram() +
+           facet_wrap(~name, scales = "free_x")
+```
