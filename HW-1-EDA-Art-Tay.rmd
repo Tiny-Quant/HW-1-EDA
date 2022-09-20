@@ -334,8 +334,10 @@ data_imputed_factor <- data_quant_fe %>% select(where(is.factor))
 ```{r}
 data_clean_cluster_1 <- cbind(data_imputed_numeric,
                               data_imputed_factor,
-                              "impStatus" = data_quant_clean_imputed$impStatus,
-                              "Cluster" = data_clusters$Best.partition)
+                              "impStatus" = as.factor(
+                                    data_quant_clean_imputed$impStatus),
+                              "Cluster" = as.factor(
+                                    data_clusters$Best.partition))
 ```
 
 ### Cluster 2 cleaning
@@ -361,8 +363,10 @@ data_imputed_numeric_all <- data_imputed_numeric_all %>%
 ```{r}
 data_clean_cluster_2 <- cbind(data_imputed_numeric_all,
                               data_imputed_factor,
-                              "impStatus" = data_clean_imputed_all$impStatus,
-                              "Cluster" = data_clusters_2$Best.partition)
+                              "impStatus" = as.factor(
+                                    data_clean_imputed_all$impStatus),
+                              "Cluster" = as.factor(
+                                    data_clusters_2$Best.partition))
 ```
 
 # Visualizations
@@ -382,8 +386,27 @@ plot_prices_c1 <- data_clean_cluster_1 %>%
                   geom_histogram() +
                   facet_wrap(~Cluster)
 
+cluster_summary_numeric <- data_clean_cluster_1 %>% group_by(Cluster) %>%
+                          summarise(across(where(is.numeric),
+                          list(median = median, sd = sd)))
+
+#layered density plot > data table
+
+
+cluster_summary_factor <- data_clean_cluster_1 %>%
+                          select(where(is.factor)) %>%
+                          select(-impStatus) %>%
+                          select(Cluster, neighbourhood_group) %>%
+                          pivot_longer(!Cluster) %>%
+                          count(Cluster, name, value, .drop = F, sort = T)
 ```
 
+```{r}
+plot_neighborhoods <- cluster_summary_factor %>%
+           ggplot(aes(x = value, y = n, col = value)) +
+           geom_bar(stat = 'identity') +
+           facet_wrap(~Cluster, scales = "free_x")
+```
 
 ## Check Skewness
 ```{r}
