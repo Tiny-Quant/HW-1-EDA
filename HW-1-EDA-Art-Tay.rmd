@@ -41,6 +41,8 @@ library(tidyverse)
 library(fastDummies)
 library(NbClust)
 library(kernlab)
+library(recipes)
+library(corrplot)
 ```
 
 ```{r}
@@ -403,15 +405,104 @@ cluster_summary_factor <- data_clean_cluster_1 %>%
 
 ```{r}
 plot_neighborhoods <- cluster_summary_factor %>%
-           ggplot(aes(x = value, y = n, col = value)) +
+           ggplot(aes(x = value, y = n, fill = value)) +
            geom_bar(stat = 'identity') +
            facet_wrap(~Cluster, scales = "free_x")
+```
+
+```{r}
+# Plot of room type frequency by cluster.
+cluster_summary_type<- data_clean_cluster_1 %>%
+                          select(where(is.factor)) %>%
+                          select(-impStatus) %>%
+                          select(Cluster, room_type) %>%
+                          pivot_longer(!Cluster) %>%
+                          count(Cluster, name, value, .drop = F, sort = T)
+
+plot_type <- cluster_summary_type %>%
+           ggplot(aes(x = value, y = n, fill = value)) +
+           geom_bar(stat = 'identity') +
+           facet_wrap(~Cluster, scales = "free_x")
+```
+
+```{r}
+# Plot last_review_year frequency by cluster.
+cluster_summary_year <- data_clean_cluster_1 %>%
+                          select(where(is.factor)) %>%
+                          select(-impStatus) %>%
+                          select(Cluster, last_review_year) %>%
+                          pivot_longer(!Cluster) %>%
+                          count(Cluster, name, value, .drop = F, sort = T)
+
+plot_year <- cluster_summary_year %>%
+           ggplot(aes(x = value, y = n, fill = value)) +
+           geom_bar(stat = 'identity') +
+           facet_wrap(~Cluster, scales = "free_x")
+```
+
+## Skewness Fix
+```{r}
+remove_skew <- recipe(~., x = data_imputed_numeric) %>%
+               step_normalize(all_predictors()) %>%
+               step_YeoJohnson(all_predictors()) %>%
+               prep(retain = T)
+
+data_noskew_cluster_1 <- bake(remove_skew, new_data = NULL)
+
+data_noskew_cluster_1 <- cbind(data_noskew_cluster_1,
+                              data_imputed_factor,
+                              "impStatus" = as.factor(
+                                    data_quant_clean_imputed$impStatus),
+                              "Cluster" = as.factor(
+                                    data_clusters$Best.partition))
+
+numeric_plot_noskew_1 <- data_noskew_cluster_1 %>%
+                select(price, number_of_reviews,
+                         reviews_per_month,
+                         calculated_host_listings_count,
+                         availability_365, Cluster, minimum_nights) %>%
+                pivot_longer(!Cluster) %>%
+                ggplot(aes(y = value, x = Cluster, fill = Cluster)) +
+                geom_boxplot() +
+                facet_wrap(~name, scale = "free_y")
+```
+
+```{r}
+# Fix skewness
+numeric_plot <- data_clean_cluster_1 %>%
+                select(price, number_of_reviews,
+                         reviews_per_month,
+                         calculated_host_listings_count,
+                         availability_365, Cluster, minimum_nights) %>%
+                mutate(price = log(price)) %>%
+                pivot_longer(!Cluster) %>%
+                ggplot(aes(y = value, x = Cluster, fill = Cluster)) +
+                geom_violin() +
+                facet_wrap(~name, scale = "free_y")
+```
+
+```{r}
+# Sorted heatmap correlation between variables.
+data_cor <- data_imputed_factor %>%
+            select(-neighbourhood) %>%
+            dummy_cols(remove_selected_columns = T)
+
+data_cor <- cbind(data_cor, data_imputed_numeric)
+data_cor_matrix <- cor(data_cor)
+corrplot(data_cor_matrix, method = "ellipse", order = "hclust")
 ```
 
 ## Check Skewness
 ```{r}
 # Histogram of all numerics
 plot_xx <- data_quant %>%
+           select(where(is.numeric)) %>%
+           pivot_longer(cols = everything()) %>%
+           ggplot(aes(value)) +
+           geom_histogram() +
+           facet_wrap(~name, scales = "free_x")
+
+plot_hist_noskew <- data_noskew_cluster_1 %>%
            select(where(is.numeric)) %>%
            pivot_longer(cols = everything()) %>%
            ggplot(aes(value)) +
