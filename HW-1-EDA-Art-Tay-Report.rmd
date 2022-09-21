@@ -1,0 +1,42 @@
+---
+title: "Exploratory Data Analysis of Airbnb Listing"
+author: "Art Tay"
+output: pdf_document
+---
+```{r setup, include=FALSE}
+##Setup code
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+# Libraries
+
+```
+
+# Introduction
+Airbnb, Inc. is a software company that operates a market place for people to
+rent out their properties on an ad hoc basis
+[(\textcolor{blue}{Wikipedia})](https://en.wikipedia.org/wiki/Airbnb).
+In specific dataset addressed in this report comes from Inside Airbnb,
+"a mission driven project that provides data \dots about Airbnb's
+impact of residential communities."
+[(\textcolor{blue}{Website})](http://insideairbnb.com/about/).
+The data set contains
+
+```{r Problem Description, include = F}
+# EDA
+
+# What can we learn about different hosts and areas?
+
+# What can we learn from predictions? (ex: locations, prices, reviews, etc)
+
+# Which hosts are the busiest and why?
+    ## Possible variable:
+        # avaliability_x. The availability of the listing x days
+        # in the future as determined by the calendar.
+        # Note a listing may not be available because it has been
+        # booked by a guest or blocked by the host.
+
+# Is there any noticeable difference of traffic among different areas
+# and what could be the reason for it?
+
+#Note: Don't forget get to check for missing data, skewed data, outliers.....
+```
