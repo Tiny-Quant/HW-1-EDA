@@ -121,7 +121,7 @@ plot_1 <- missing_percent %>%
 
 ```{r}
 # Plot the pattern of missing values
-gg_miss_upset(data_quant_mis, nintersects = NA, text.scale = 2,
+test_1 <- gg_miss_upset(data_quant_mis, nintersects = NA, text.scale = 2,
     mainbar.y.label = "Count of Observations with Missing Data",
     point.size = 5, line.size = 2, matrix.color = "orange",
     main.bar.color = "skyblue")
