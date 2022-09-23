@@ -29,7 +29,6 @@ library(NbClust)
 library(recipes)
 ```
 
-
 \captionsetup[table]{labelformat = empty}
 \captionsetup[figure]{labelfont = bf}
 
@@ -70,7 +69,9 @@ emphasis on determine which listings had the most business traffic.
 
 ## Summary of Results
 ```{r plot map, echo = F, fig.cap = caption}
-#| fig.align = "center"
+#| fig.align = "center",
+#| out.height = '75%',
+#| out.width = '75%'
 load("Report Figures/map_plot.rds")
 
 map_plot
@@ -103,7 +104,9 @@ considered to be `NA`. Below is a plot of the pattern and quantity of missing va
 after recoding.
 
 ```{r plot missing pattern, echo = F, fig.cap = caption}
-#| fig.align = "center"
+#| fig.align = "center",
+#| out.height = '80%',
+#| out.width = '80%'
 load("Report Figures/data_quant_mis.rds")
 
 gg_miss_upset(data_quant_mis, nset = 3, text.scale = c(1.3, 1, 1, 1, 1.5, 2),
@@ -176,7 +179,10 @@ number of cluster was determined based on maximizing the "silhouette" index (Rou
 The cluster modeling determined that 5 was the optimal number of clusters.
 
 ```{r plot cluster numerics, echo = F, fig.cap = caption}
-#| fig.align = "center"
+#| fig.align = "center",
+#| out.height = '80%',
+#| out.width = '80%'
+
 load("Report Figures/numeric_plot_noskew_1.rds")
 
 numeric_plot_noskew_1
@@ -197,7 +203,10 @@ with the highest total number and frequency of reviews. With a median
 almost an entire standard deviation above any other cluster.
 
 ```{r plot cluster last_review_year, echo = F, fig.cap = caption}
-#| fig.align = "center"
+#| fig.align = "center",
+#| out.height = '70%',
+#| out.width = '70%'
+
 load("Report Figures/plot_year.rds")
 
 plot_year
@@ -217,30 +226,36 @@ often. A medium availability might actually be the best indicator of good busine
 as the Airbnb could be offered and book frequently on a rolling basis.
 Cluster 3 has one of the lowest median price points, which might make it
 attractive to more travelers.
-
 ```{r plot cluster type, echo = F, fig.cap = caption}
-#| fig.align = "center"
+#| fig.align = "center",
+#| out.height = '60%',
+#| out.width = '60%'
+
 load("Report Figures/plot_type.rds")
 
 plot_type
 
 caption <- "Frequency of the listing's room type across different clusters."
 ```
+\textbf{Figure 6} gives more color on the pricing
+in cluster 3 as it is mostly comprised of private room instead of entire homes
+and apartments.
 
-\textbf{Figure 5} gives more color on the pricing in cluster 3 as it is mostly
-comprised of private room instead of entire homes and apartments.
+\pagebreak
 
 ```{r plot cluster neighbourhood, echo = F, fig.cap = caption}
-#| fig.align = "center"
+#| fig.align = "center",
+#| out.height = '70%',
+#| out.width = '70%'
+
 load("Report Figures/plot_neighborhoods.rds")
 
 plot_neighborhoods
 
 caption <- "Borough frequency faceted across different clusters."
 ```
-
 Unlike all of the other clusters, cluster 3 is geographically disperse across
-the 5 boroughs. This can be seen in \text{Figure 1} and \textbf{Figure 6}.
+the 5 boroughs. This can be seen in \textbf{Figure 1} and \textbf{Figure 7}.
 
 Although, cluster 3 probably generates the most business in terms of number
 of bookings, it might not be the best in term of revenue. \textbf{Figure 4}
@@ -249,7 +264,7 @@ duration requirement. This means that every booking would generate the hosts
 a large cash flow. Furthermore, cluster 5 has the most listings per host
 of any of the clusters. This implies that cluster 5 might represent
 corporate of investor owned properties. This might also explain why
-\textbf{Figure 5} shows that all the listings in cluster 5 are for the entire
+\textbf{Figure 6} shows that all the listings in cluster 5 are for the entire
 unit. On the other hand, \text{Figure 1} also demonstrates that these properties
 are rarely ever booked. Cluster 5 has the lowest number of reviews as well as
 the highest amount of open availability.
@@ -454,7 +469,6 @@ data_clean_cluster_1 <- cbind(data_imputed_numeric,
                                     data_clusters$Best.partition))
 ```
 
-### Cluster Statistics and Plots
 ```{r clean cluster data for plotting}
 cluster_summary_numeric <- data_clean_cluster_1 %>% group_by(Cluster) %>%
                           summarise(across(where(is.numeric),
@@ -468,7 +482,9 @@ cluster_summary_factor <- data_clean_cluster_1 %>%
                           count(Cluster, name, value, .drop = F, sort = T)
 ```
 
-#### Factor Plot
+## Visualizations
+
+### Factor Plots
 ```{r plot neighborhood frequency by cluster}
 plot_neighborhoods <- cluster_summary_factor %>%
            ggplot(aes(x = value, y = n, fill = value)) +
@@ -527,7 +543,7 @@ plot_year <- cluster_summary_year %>%
 save(plot_year, file = "Report Figures/plot_year.rds")
 ```
 
-#### Numeric Plots
+### Numeric Plots
 ```{r plot boxplots of all numerics colored by cluster}
 remove_skew <- recipe(~., x = data_imputed_numeric) %>%
                step_normalize(all_predictors()) %>%
@@ -561,7 +577,8 @@ numeric_plot_noskew_1 <- data_noskew_cluster_1 %>%
 save(numeric_plot_noskew_1, file = "Report Figures/numeric_plot_noskew_1.rds")
 ```
 
-#### Map Plot
+### Map Plot
+$\\$
 ```{r map plot 1}
 #NYC_Map <- get_stamenmap(
     #bbox = c(left = -74.3, bottom = 40.5, right = -73.6, top = 40.95),

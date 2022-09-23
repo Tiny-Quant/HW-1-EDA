@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.21)  22 SEP 2022 22:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.21)  22 SEP 2022 22:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -423,7 +423,7 @@ Package hyperref Info: Link coloring OFF on input line 115.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-<Report Figures/airbnb logo with name.png, id=76, 2007.5pt x 627.34375pt>
+<Report Figures/airbnb logo with name.png, id=88, 2007.5pt x 627.34375pt>
 File: Report Figures/airbnb logo with name.png Graphic file (type png)
 <use Report Figures/airbnb logo with name.png>
 Package pdftex.def Info: Report Figures/airbnb logo with name.png  used on input line 116.
@@ -458,273 +458,91 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 116.
 (c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot map-1.pdf, id=79, 469.755pt x 325.215pt>
+<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot map-1.pdf, id=91, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot map-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot map-1.pdf>
 Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot map-1.pdf  used on input line 143.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+(pdftex.def)             Requested size: 352.31538pt x 243.91064pt.
+[1
+
+{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Report Figures/airbnb logo with name.png> <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot map-1.pdf>]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 174.
 (c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf, id=80, 469.755pt x 325.215pt>
+<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf, id=116, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf>
 Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf  used on input line 185.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[1
-
-{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./Report Figures/airbnb logo with name.png>]
-<Report Figures/Inside Airbnb logo.png, id=98, 111.41624pt x 27.85406pt>
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 202.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[2 <./Report Figures/Inside Airbnb logo.png> <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot map-1.pdf>]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 202.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[3 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf>]
+(pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
+[2 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 206.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 206.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 206.
-<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf, id=131, 469.755pt x 325.215pt>
+<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf, id=136, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf>
 Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf  used on input line 233.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf, id=132, 469.755pt x 325.215pt>
+[3 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf>]
+<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf, id=151, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf>
 Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf  used on input line 273.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster last_review_year-1.pdf, id=133, 469.755pt x 325.215pt>
+(pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
+<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster last_review_year-1.pdf, id=152, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster last_review_year-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster last_review_year-1.pdf>
 Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster last_review_year-1.pdf  used on input line 295.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 315.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[4]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 315.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[5 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf>]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 315.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[6 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf>]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 315.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[7 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster last_review_year-1.pdf>]
-<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster type-1.pdf, id=176, 469.755pt x 325.215pt>
+(pdftex.def)             Requested size: 328.82626pt x 227.64894pt.
+[4 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf>]
+<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster type-1.pdf, id=166, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster type-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster type-1.pdf>
 Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster type-1.pdf  used on input line 318.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf, id=177, 469.755pt x 325.215pt>
+(pdftex.def)             Requested size: 281.85518pt x 195.1305pt.
+[5 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster last_review_year-1.pdf> <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster type-1.pdf>]
+<HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf, id=183, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf>
-Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf  used on input line 330.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 371.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[8 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster type-1.pdf>]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 371.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[9 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf>]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 373.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[10]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 450.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[11]
+Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf  used on input line 332.
+(pdftex.def)             Requested size: 328.82626pt x 227.64894pt.
+[6 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster neighbourhood-1.pdf>] [7]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 481.
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 518.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[12]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 582.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[13]
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 629.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 483.
+[8] [9]
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 630.
 (c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 663.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
+) [10] [11]
+Underfull \hbox (badness 10000) in paragraph at lines 731--732
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
+ []
 
-[14]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 725.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[15]
 
 Package caption Warning: Unused \captionsetup[table] on input line 118.
 See the caption package documentation for explanation.
 
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 775.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[16]
-File: Report Figures/Inside Airbnb logo.png Graphic file (type png)
-<use Report Figures/Inside Airbnb logo.png>
-Package pdftex.def Info: Report Figures/Inside Airbnb logo.png  used on input line 775.
-(pdftex.def)             Requested size: 111.41766pt x 27.85439pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 31.45442pt, for example:
-(fancyhdr)                \setlength{\headheight}{31.45442pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-19.45442pt}.
-
-[17] (./HW-1-EDA-Art-Tay-Report.aux)
+[12] (./HW-1-EDA-Art-Tay-Report.aux)
 Package rerunfilecheck Info: File `HW-1-EDA-Art-Tay-Report.out' has not changed.
-(rerunfilecheck)             Checksum: CDB0316C2D810D52D6A11F675EACF8A7;2231.
+(rerunfilecheck)             Checksum: 9B0E76E863FEE067D71F49D092F8B1A6;2497.
  ) 
 Here is how much of TeX's memory you used:
- 12766 strings out of 477035
- 209869 string characters out of 5826726
- 547836 words of memory out of 5000000
- 33636 multiletter control sequences out of 15000+600000
+ 12757 strings out of 477035
+ 209570 string characters out of 5826726
+ 547718 words of memory out of 5000000
+ 33633 multiletter control sequences out of 15000+600000
  518830 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,14n,77p,462b,480s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,12n,77p,462b,480s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on HW-1-EDA-Art-Tay-Report.pdf (17 pages, 3394376 bytes).
+Output written on HW-1-EDA-Art-Tay-Report.pdf (12 pages, 3390589 bytes).
 PDF statistics:
- 320 PDF objects out of 1000 (max. 8388607)
- 257 compressed objects within 3 object streams
- 69 named destinations out of 1000 (max. 500000)
- 190 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 304 PDF objects out of 1000 (max. 8388607)
+ 248 compressed objects within 3 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 209 words of extra memory for PDF output out of 10000 (max. 10000000)
 
