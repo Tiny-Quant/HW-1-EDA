@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.21)  22 SEP 2022 22:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.9.21)  23 SEP 2022 14:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -477,15 +477,20 @@ Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing
 (pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
 [2 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot missing pattern-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 206.
+(Font)              <10> on input line 207.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 206.
+(Font)              <7> on input line 207.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 206.
+(Font)              <5> on input line 207.
+
+Underfull \hbox (badness 1983) in paragraph at lines 214--226
+\T1/lmr/m/n/10 First, \T1/lmtt/m/n/10 NAs \T1/lmr/m/n/10 for \T1/lmtt/m/n/10 review_per_month \T1/lmr/m/n/10 were re-placed with \T1/lmtt/m/n/10 0\T1/lmr/m/n/10 . Next, \T1/lmtt/m/n/10 last_review \T1/lmr/m/n/10 was re-placed by
+ []
+
 <HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf, id=136, 469.755pt x 325.215pt>
 File: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf Graphic file (type pdf)
 <use HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf>
-Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf  used on input line 233.
+Package pdftex.def Info: HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf  used on input line 234.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [3 <./HW-1-EDA-Art-Tay-Report_files/figure-latex/plot numeric skewness-1.pdf>]
 <HW-1-EDA-Art-Tay-Report_files/figure-latex/plot cluster numerics-1.pdf, id=151, 469.755pt x 325.215pt>
@@ -528,18 +533,18 @@ See the caption package documentation for explanation.
 
 [12] (./HW-1-EDA-Art-Tay-Report.aux)
 Package rerunfilecheck Info: File `HW-1-EDA-Art-Tay-Report.out' has not changed.
-(rerunfilecheck)             Checksum: 9B0E76E863FEE067D71F49D092F8B1A6;2497.
+(rerunfilecheck)             Checksum: B388EA9F5B3CCDDBC6A62A255DB66EA8;2513.
  ) 
 Here is how much of TeX's memory you used:
  12757 strings out of 477035
- 209570 string characters out of 5826726
- 547718 words of memory out of 5000000
+ 209574 string characters out of 5826726
+ 547721 words of memory out of 5000000
  33633 multiletter control sequences out of 15000+600000
  518830 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  72i,12n,77p,462b,480s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/Users/Admin/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on HW-1-EDA-Art-Tay-Report.pdf (12 pages, 3390589 bytes).
+Output written on HW-1-EDA-Art-Tay-Report.pdf (12 pages, 3390601 bytes).
 PDF statistics:
  304 PDF objects out of 1000 (max. 8388607)
  248 compressed objects within 3 object streams

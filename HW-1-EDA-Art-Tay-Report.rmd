@@ -53,19 +53,19 @@ library(recipes)
 ```
 
 # Introduction
-Airbnb, Inc. is a software company that operates a market place for people to
-rent out their properties on an ad hoc basis
+Airbnb, Inc. is a software company that operates a marketplace for people to
+rent their properties on an ad hoc basis
 [(\textcolor{blue}{Wikipedia})](https://en.wikipedia.org/wiki/Airbnb).
-In specific dataset addressed in this report comes from Inside Airbnb,
+The specific dataset addressed in this report comes from Inside Airbnb,
 "a mission driven project that provides data \dots about Airbnb's
-impact of residential communities."
+impact on residential communities."
 [(\textcolor{blue}{Website})](http://insideairbnb.com/about/).
 The data set contains 12 predictive variables: 4 categorical and
 8 numeric. All of the roughly 40,000 listings in this particular
 dataset were located in New York City.
 The ultimate goal of this analysis was to categorize the
 different types of Airbnb listings and their hosts, with a particular
-emphasis on determine which listings had the most business traffic.
+emphasis on determining which listings had the most business traffic.
 
 ## Summary of Results
 ```{r plot map, echo = F, fig.cap = caption}
@@ -80,11 +80,11 @@ caption <- "Geographic plot of cluster and price."
 ```
 
 Ultimately 5 different groups or clusters of Airbnbs were identified.
-Groups 1, 2, and 4 were mainly geographically tied.
-Cluster 1 contain most of the listings from Staten Island and Brooklyn,
+Clusters 1, 2, and 4 were mainly geographically tied.
+Cluster 1 contained most of the listings from Staten Island and Brooklyn,
 Cluster 2 was tied to Manhattan and Cluster 4 encompassed the Bronx and Queens.
 Cluster 5 in made up of the most expensive listings. They are
-all located in Manhattan, but are rarely actually booked. Finally, Cluster 3 was
+all located in Manhattan, but are rarely booked. Finally, Cluster 3 was
 determined to be the busiest Airbnbs. Cluster 3 was geographically disperse,
 medianly priced, and had the most number and recency of reviews. If we assume
 that every review represents at least one booking, then Cluster 3 is by far the
@@ -98,8 +98,8 @@ in the raw data: missing values, feature engineering, and skewness.
 ### Missing Values
 Upon first inspection there are only `NA` values in the `reviews_per_month` variable;
 however, there are also blanks in `last_review`, and zero values that appear
-erroneous. Any zeros in `price`, `lattitude`, `longitude`, and `minimum_night` was
-replaced with an `NA`. Furthermore, any blank spaces in a factor variable was also
+erroneous. Any zeros in `price`, `lattitude`, `longitude`, and `minimum_night` were
+replaced with `NA`. Furthermore, any blank spaces in a factor variable was also
 considered to be `NA`. Below is a plot of the pattern and quantity of missing values
 after recoding.
 
@@ -114,14 +114,14 @@ gg_miss_upset(data_quant_mis, nset = 3, text.scale = c(1.3, 1, 1, 1, 1.5, 2),
     point.size = 2.5, line.size = 0.75, matrix.color = "orange",
     main.bar.color = "skyblue")
 
-caption <- "Quantity and Pattern of Missing Data. The blue bars represent
-    the quantity of the pattern shone of the matrix below. The black bar
-    show the number of missing values of the variable to the right across
+caption <- "Quantity and pattern of missing data. The blue bars represent
+    the quantity of the pattern shone on the matrix below. The black bar
+    show the number of missing values of the variables to the right across
     all patterns."
 ```
 
 Although it appears that there are roughly 10,000 missing values for `review_per_month` and
-`last_review` the pattern is not random, in fact, \textbf{Figure 2} indications that these
+`last_review`, the pattern is not random, in fact, \textbf{Figure 2} indications that these
 two variables are always missing together. Upon further inspection, the missingness of
 these two variable perfectly correlates with `number_of_review` being equal to 0. Ultimately
 these are not actually missing values, they simple indicate that a particular listing has never
@@ -129,23 +129,22 @@ been reviewed.
 
 There were 11 listing where the `price` was `0`. Because price is such a key factor in the
 desirability of a particular listing, these `11` values were imputed using the k-nearest
-neighbors algorithm, where $k = 10$, given the large number of observations.
-Since `price` is numeric the median of the neighbor was chosen.
+neighbors algorithm, where $k = 10$, because of the large number of observations.
+Since `price` is numeric, the median of the neighbor was used for the imputed value.
 
 ### Feature Engineering
-After the nature of missing data was determined, related data clean commenced.
 First, `NAs` for `review_per_month` were replaced with `0`. Next, `last_review`
 was replaced by `last_review_year` to reduce the number of factor levels. In hindsight,
 the day and month could have also been extracted as new features. Then, the
 `neighbourhood` factor was dropped because of the copious number of levels and
 the majority of the information being captured in `neighbourhood_group`. Perhaps
 a hierarchical feature could have been engineered. Finally, all factor variables were
-converted into dummy variables and all numeric variables were normalized. This step was a
+converted into `n` dummy variables and all numeric variables were normalized. This step was a
 requirement of the imputation algorithm used. Note that `impStatus` was added as a binary
 factor `1` if price was imputed, and `0` otherwise.
 
 ### Skewness
-Skewness was a key issue among also every single numeric variable.
+Skewness was a key issue among almost every single numeric variable.
 
 ```{r plot numeric skewness, echo = F, fig.cap = caption}
 #| fig.align = "center"
@@ -159,24 +158,24 @@ caption <- "Histogram of raw numeric features before any transformations.
 
 The `price` was transformed using a log function, since all zero values were treat as `NA`.
 This was done to help the imputation process. The decision was made to not transform any
-of the other numeric predictors before clustering as completed. There are competing views
+of the other numeric predictors before clustering was completed. There are competing views
 in the literature about whether or not clustering algorithms are effected by skewness either
-negatively of positively. Because the clusters were ultimately fit using euclidean distances
+negatively of positively. Because the clusters were ultimately fit using Euclidean distances
 and inter-cluster variability, applying transformations that would artificially reduce variance
 seem incorrect. Post clustering a Yeo-Johnson transformation was applied to the numeric variables
 only to increase visibility of plot features. Yeo-Johnson was chosen over Box-Cox because it can
-work with normalized data.
+work with normalized data (negative values).
 
 ## Cluster Modeling
-Cluster was applied to the entire cleaned and imputed dataset as outlined above.
-The cluster algorithm used was implemented by the `NBClust` package. Clusters were
+A clustering algorithm was applied to the entire cleaned and imputed dataset as outlined above.
+The clustering algorithm used was implemented by the `NBClust` package. Clusters were
 determined based on a minimization of total within-cluster variance where dissimilarity
-was defined as Euclidean distance. This is know as WARD clustering (Ward 1963). The
+was defined by Euclidean distance. This is know as WARD clustering (Ward, 1963). The
 number of cluster was determined based on maximizing the "silhouette" index (Rousseeuw, 1987).
 2-15 clusters were tried.
 
 # Result
-The cluster modeling determined that 5 was the optimal number of clusters.
+The cluster model determined that 5 was the optimal number of clusters.
 
 ```{r plot cluster numerics, echo = F, fig.cap = caption}
 #| fig.align = "center",
@@ -199,7 +198,7 @@ As mentioned in the introduction, cluster 3 appears to be the busiest type
 of Airbnbs. This conclusion was mostly draw from the `number_of_reviews` and
 the `review_per_month` since all review should correspond to a booking.
 \textbf{Figure 4} clearly illustrates that cluster 3 had the listings
-with the highest total number and frequency of reviews. With a median
+with the highest total number and frequency of reviews. Cluster 3 had a median
 almost an entire standard deviation above any other cluster.
 
 ```{r plot cluster last_review_year, echo = F, fig.cap = caption}
@@ -221,9 +220,9 @@ availability means that a particular listing is being booked more often;
 however, according to the data dictionary provided by Inside Airbnb, this
 field could be low because the host is only renting it out for a small window,
 when they are on vacation for example. This means that a low availability could
-mean the listing is book often or it could mean the host does not offer bookings
-often. A medium availability might actually be the best indicator of good business
-as the Airbnb could be offered and book frequently on a rolling basis.
+mean the listing is booked often or it could mean the host does not rent it
+often. A medium availability might actually be the best indicator of high volume business
+as the Airbnb could be offered and booked frequently on a rolling basis.
 Cluster 3 has one of the lowest median price points, which might make it
 attractive to more travelers.
 ```{r plot cluster type, echo = F, fig.cap = caption}
@@ -238,8 +237,8 @@ plot_type
 caption <- "Frequency of the listing's room type across different clusters."
 ```
 \textbf{Figure 6} gives more color on the pricing
-in cluster 3 as it is mostly comprised of private room instead of entire homes
-and apartments.
+in cluster 3 as it is mostly comprised of private rooms instead of entire homes
+or apartments.
 
 \pagebreak
 
@@ -254,7 +253,7 @@ plot_neighborhoods
 
 caption <- "Borough frequency faceted across different clusters."
 ```
-Unlike all of the other clusters, cluster 3 is geographically disperse across
+Unlike all of the other clusters, cluster 3 was geographically disperse across
 the 5 boroughs. This can be seen in \textbf{Figure 1} and \textbf{Figure 7}.
 
 Although, cluster 3 probably generates the most business in terms of number
@@ -263,7 +262,7 @@ shows that cluster 5 has the highest median price and well as the highest
 duration requirement. This means that every booking would generate the hosts
 a large cash flow. Furthermore, cluster 5 has the most listings per host
 of any of the clusters. This implies that cluster 5 might represent
-corporate of investor owned properties. This might also explain why
+corporate or investor owned properties. This might also explain why
 \textbf{Figure 6} shows that all the listings in cluster 5 are for the entire
 unit. On the other hand, \text{Figure 1} also demonstrates that these properties
 are rarely ever booked. Cluster 5 has the lowest number of reviews as well as
@@ -273,19 +272,19 @@ the highest amount of open availability.
 The data was able to be grouped into 5 clusters. 3 of the cluster were based
 on geography a gave little insight into the business operations of these listings.
 Cluster 3 represents what most people think of when they think of a successful Airbnb.
-Single property owners rent out a room to make some extra cash. Geographically
+Single property owners that rent out a room to make some extra cash. Geographically
 disperse, medianly priced, and booked as well as availability often. Cluster 5
-might also represent successful listings all be it with a different business
+might also represent successful listings, all be it with a different business
 strategy. All the listings in cluster 5 are expensive whole unit rental properties
 located in Manhattan. Furthermore multiple listings are own by each host, and
-they require larger bookings. Although not booked often, they appear to make
+they require longer rental periods. Although not booked often, they appear to make
 up for their lack of volume with a premium price point. If these listings are
 profitable, it might indicate that Airbnb is going the way of corporate landlords
-instead of the individual it was originally marketed to.
+instead of the individuals it was originally marketed to.
 
 \pagebreak
 
-# Appendix-Code
+# Appendix - Code
 
 ```{r libraries}
 # Libraries
