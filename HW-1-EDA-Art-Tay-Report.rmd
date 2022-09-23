@@ -481,18 +481,18 @@ save(numeric_plot_noskew_1, file = "Report Figures/numeric_plot_noskew_1.rds")
 ```
 
 #### Map Plot
-```{r plot clusters on map}
-NYC_Map <- get_stamenmap(
-    bbox = c(left = -74.3, bottom = 40.5, right = -73.6, top = 40.95),
-    maptype = "toner-background", color = "bw")
+```{r map plot 1}
+#NYC_Map <- get_stamenmap(
+    #bbox = c(left = -74.3, bottom = 40.5, right = -73.6, top = 40.95),
+    #maptype = "toner-background", color = "bw")
 ```
 
-```{r}
-save(NYC_Map, file = "Report Figures/NYC_Map.rds")
-#load("Report Figures/NYC_Map.rds")
+```{r map plot 2}
+#save(NYC_Map, file = "Report Figures/NYC_Map.rds")
+load("Report Figures/NYC_Map.rds")
 ```
 
-```{r}
+```{r map plot 3}
 df_neighbourhood_labels <- data.frame(
     longitude = c(-73.8648, -73.9442, -73.96, -73.7949, -74.1502),
     latitude = c(40.8448, 40.6782, 40.7831, 40.7282, 40.5795),
@@ -500,7 +500,7 @@ df_neighbourhood_labels <- data.frame(
 )
 ```
 
-```{r}
+```{r, map plot 4}
 map_plot <- ggmap(NYC_Map) + geom_point(data = data_clean_cluster_1,
                             mapping = aes(x = longitude, y = latitude,
                             col = Cluster, size = price,),
