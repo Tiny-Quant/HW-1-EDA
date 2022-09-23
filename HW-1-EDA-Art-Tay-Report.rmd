@@ -4,13 +4,20 @@ author: "Art Tay"
 output: pdf_document
 header-includes:
     - \usepackage{caption}
+    - \usepackage{titling}
+    - \pretitle{\begin{center}
+        \includegraphics[width = 2in, height = 2in]
+        {Report Figures/airbnb logo with name.png}\LARGE\\}
+    - \posttitle{\end{center}}
+    - \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        \fancyhead[CO, CE]{Art Tay}
 ---
+
 ```{r setup, include=FALSE}
 # Setup code
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 knitr::opts_knit$set(eval.after = "fig.cap")
-
-setwd("C:/Users/Admin/Google Drive/UTSW/Semester 1/Computational Stats (6324)/HW/HW-1-EDA") # nolint
 
 # Libraries
 library(VIM)
@@ -20,8 +27,8 @@ library(ggmap)
 library(fastDummies)
 library(NbClust)
 library(recipes)
-library(corrplot)
 ```
+
 
 \captionsetup[table]{labelformat = empty}
 \captionsetup[figure]{labelfont = bf}
@@ -71,13 +78,15 @@ map_plot
 caption <- "Geographic plot of cluster and price."
 ```
 
-Ultimately 5 different groups of Airbnbs were identified. Groups 1, 2, and 4
-were mainly geographically tied, representing Brooklyn, Manhattan, and Queens
-respectively. Group 5 in made up of the most expensive listings. They are
-all located in Manhattan, but are rarely actually booked. Finally, Group 3 was
-determined to be the busiest Airbnbs. Group 3 was geographically disperse,
+Ultimately 5 different groups or clusters of Airbnbs were identified.
+Groups 1, 2, and 4 were mainly geographically tied.
+Cluster 1 contain most of the listings from Staten Island and Brooklyn,
+Cluster 2 was tied to Manhattan and Cluster 4 encompassed the Bronx and Queens.
+Cluster 5 in made up of the most expensive listings. They are
+all located in Manhattan, but are rarely actually booked. Finally, Cluster 3 was
+determined to be the busiest Airbnbs. Cluster 3 was geographically disperse,
 medianly priced, and had the most number and recency of reviews. If we assume
-that every review represents at least one booking, then Group 3 is by far the
+that every review represents at least one booking, then Cluster 3 is by far the
 listings that attract the most business.
 
 # Methodology
@@ -102,11 +111,14 @@ gg_miss_upset(data_quant_mis, nset = 3, text.scale = c(1.3, 1, 1, 1, 1.5, 2),
     point.size = 2.5, line.size = 0.75, matrix.color = "orange",
     main.bar.color = "skyblue")
 
-caption <- "Quantity and Pattern of Missing Data. The blue bars represent the quantity of the pattern shone of the matrix below. The black bar show the number of missing values of the variable to the right across all patterns." # nolint"
+caption <- "Quantity and Pattern of Missing Data. The blue bars represent
+    the quantity of the pattern shone of the matrix below. The black bar
+    show the number of missing values of the variable to the right across
+    all patterns."
 ```
 
 Although it appears that there are roughly 10,000 missing values for `review_per_month` and
-`last_review` the pattern is not random, in fact, \textbf{Figure 1} indications that these
+`last_review` the pattern is not random, in fact, \textbf{Figure 2} indications that these
 two variables are always missing together. Upon further inspection, the missingness of
 these two variable perfectly correlates with `number_of_review` being equal to 0. Ultimately
 these are not actually missing values, they simple indicate that a particular listing has never
@@ -138,7 +150,8 @@ load("Report Figures/plot_skew.rds")
 
 plot_skew
 
-caption <- "Histogram of raw numeric features before any transformations. Most distribution are clearly right skewed" # nolint
+caption <- "Histogram of raw numeric features before any transformations.
+    Most distribution are clearly right skewed"
 ```
 
 The `price` was transformed using a log function, since all zero values were treat as `NA`.
@@ -167,28 +180,95 @@ The cluster modeling determined that 5 was the optimal number of clusters.
 load("Report Figures/numeric_plot_noskew_1.rds")
 
 numeric_plot_noskew_1
+
+caption <- "Side by side cluster grouped boxplots faceted across
+    numeric predictors.The data was normalized to have a mean of zero
+    and standard deviation of one as well as transformed via Yeos-Johnson.
+    Grand Group Mean refers to the sample average of a given numeric variable
+    across all clusters."
 ```
 
-```{r plot cluster neighbourhood, echo = F, fig.cap = caption}
-#| fig.align = "center"
-load("Report Figures/plot_neighborhoods.rds")
-
-plot_neighborhoods
-```
-
-```{r plot cluster type, echo = F, fig.cap = caption}
-#| fig.align = "center"
-load("Report Figures/plot_type.rds")
-
-plot_type
-```
+Cluster 3 and cluster 5 have the most variation among the five groupings.
+As mentioned in the introduction, cluster 3 appears to be the busiest type
+of Airbnbs. This conclusion was mostly draw from the `number_of_reviews` and
+the `review_per_month` since all review should correspond to a booking.
+\textbf{Figure 4} clearly illustrates that cluster 3 had the listings
+with the highest total number and frequency of reviews. With a median
+almost an entire standard deviation above any other cluster.
 
 ```{r plot cluster last_review_year, echo = F, fig.cap = caption}
 #| fig.align = "center"
 load("Report Figures/plot_year.rds")
 
 plot_year
+
+caption <- "The frequency of which year the listing was last reviewed."
 ```
+
+\textbf{Figure 5} furthers that the majority of these reviews happened in the
+most recent year (in the data). Although cluster 3 had a middle of the road
+availability, this variable is quite inconclusive. One might think a lower
+availability means that a particular listing is being booked more often;
+however, according to the data dictionary provided by Inside Airbnb, this
+field could be low because the host is only renting it out for a small window,
+when they are on vacation for example. This means that a low availability could
+mean the listing is book often or it could mean the host does not offer bookings
+often. A medium availability might actually be the best indicator of good business
+as the Airbnb could be offered and book frequently on a rolling basis.
+Cluster 3 has one of the lowest median price points, which might make it
+attractive to more travelers.
+
+```{r plot cluster type, echo = F, fig.cap = caption}
+#| fig.align = "center"
+load("Report Figures/plot_type.rds")
+
+plot_type
+
+caption <- "Frequency of the listing's room type across different clusters."
+```
+
+\textbf{Figure 5} gives more color on the pricing in cluster 3 as it is mostly
+comprised of private room instead of entire homes and apartments.
+
+```{r plot cluster neighbourhood, echo = F, fig.cap = caption}
+#| fig.align = "center"
+load("Report Figures/plot_neighborhoods.rds")
+
+plot_neighborhoods
+
+caption <- "Borough frequency faceted across different clusters."
+```
+
+Unlike all of the other clusters, cluster 3 is geographically disperse across
+the 5 boroughs. This can be seen in \text{Figure 1} and \textbf{Figure 6}.
+
+Although, cluster 3 probably generates the most business in terms of number
+of bookings, it might not be the best in term of revenue. \textbf{Figure 4}
+shows that cluster 5 has the highest median price and well as the highest
+duration requirement. This means that every booking would generate the hosts
+a large cash flow. Furthermore, cluster 5 has the most listings per host
+of any of the clusters. This implies that cluster 5 might represent
+corporate of investor owned properties. This might also explain why
+\textbf{Figure 5} shows that all the listings in cluster 5 are for the entire
+unit. On the other hand, \text{Figure 1} also demonstrates that these properties
+are rarely ever booked. Cluster 5 has the lowest number of reviews as well as
+the highest amount of open availability.
+
+# Conclusion
+The data was able to be grouped into 5 clusters. 3 of the cluster were based
+on geography a gave little insight into the business operations of these listings.
+Cluster 3 represents what most people think of when they think of a successful Airbnb.
+Single property owners rent out a room to make some extra cash. Geographically
+disperse, medianly priced, and booked as well as availability often. Cluster 5
+might also represent successful listings all be it with a different business
+strategy. All the listings in cluster 5 are expensive whole unit rental properties
+located in Manhattan. Furthermore multiple listings are own by each host, and
+they require larger bookings. Although not booked often, they appear to make
+up for their lack of volume with a premium price point. If these listings are
+profitable, it might indicate that Airbnb is going the way of corporate landlords
+instead of the individual it was originally marketed to.
+
+\pagebreak
 
 # Appendix-Code
 
@@ -318,7 +398,8 @@ plot_skew <- data_quant %>%
            ggplot(aes(value)) +
            geom_histogram() +
            facet_wrap(~name, scales = "free_x") +
-           theme_bw()
+           theme_bw() +
+           labs(x = "", y = "Frequency")
 
 save(plot_skew, file = "Report Figures/plot_skew.rds")
 ```
